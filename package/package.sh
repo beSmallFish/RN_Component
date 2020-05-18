@@ -1,12 +1,11 @@
 #!/usr/bin/env bash
 
-
-
 system=
 env=
 uploadTo=
 build=release
 isNeedRun=true
+iosSign=dev
 
 #echo ----------- 系统:$system,  API环境:$env,  上传到:$uploadTo,  ------------------
 
@@ -16,12 +15,12 @@ chmod 777 ./*.sh
 function package(){
 
     if [ "$system" = "ios" ]; then
-       ./ios.sh $build
+       ./ios.sh $build $iosSign
     elif [ "$system" = "android" ]; then
        ./android.sh $build
     elif [ "$system" = "both" ]; then
        ./android.sh $build
-       ./ios.sh $build
+       ./ios.sh $build $iosSign
     fi
 
 }
@@ -43,7 +42,7 @@ function upload(){
     fi
 
     if [ "$uploadTo" = "pgy" ]; then
-        ./pgy_upload.sh $system $build
+        ./pgy_upload.sh $system $build $iosSign
     elif [ "$uploadTo" = "appstore" ]; then
         #source ./appstore_upload.sh
         echo "upload to appStore"
@@ -61,11 +60,14 @@ while getopts :e:s:u:b:h OPTION; do
         ;;
         b) build=$OPTARG
         ;;
+        i) iosSign=$OPTARG
+        ;;
         h)
-          echo -e " -b ===>> 选择构建版本 ===>> release/debug"
+          echo -e " -b ===>> 选择构建版本 ===>> release/debug/staging"
           echo -e " -s ===>> 选择系统 ===>> ios/android/both"
-          echo -e " -e ===>> 选择Api环境 ===>> dev/release/test"
+          #echo -e " -e ===>> 选择Api环境 ===>> dev/release/test"
           echo -e " -u ===>> 上传到 ===>> pgy/appstore/"
+          echo -e " -i ===>> ios签名 ===>> dev/ad-hoc/"
           echo -e " -h ===>> 帮助 ===>> 查看已有参数"
           isNeedRun=false
         ;;
@@ -75,8 +77,7 @@ while getopts :e:s:u:b:h OPTION; do
 done
 
 if [ "$isNeedRun" = "true" ]; then
-    buildEnv
+    #buildEnv
     package
     upload
 fi
-

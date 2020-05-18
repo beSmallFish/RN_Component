@@ -4,12 +4,13 @@
 cd .
 echo ---------------- 上传蒲公英 -----------------
 
-PGY_API_KEY=973647c8bdcad1c84f471059a0824d18
+PGY_API_KEY=4c515cff705ee50ef456d75835987cdb
 PGY_HOST=https://www.pgyer.com/apiv2/app/upload
 
-projectName=workerApp
+projectName=app
 system=$1
 build=$2
+iosSign=$3
 
 if [ "$build" = "debug" ]; then
    build=Debug
@@ -22,9 +23,11 @@ else
 fi
 
 
+#echo ${iosSign} $build
+
 
 # 上传蒲公英 暂时使用编译路径下的文件（最新 唯一一个/ 自定义文件夹路径下 多个历史文件）
-IPA=`ls ../ios/build/ipa-ad-hoc/$build/*.ipa`
+IPA=`ls ../ios/build/${iosSign}/$build/*.ipa`
 build_lowercase=$(echo $build | tr '[A-Z]' '[a-z]')
 APK=`ls ../android/app/build/outputs/apk/${build_lowercase}/*.apk`
 
@@ -46,7 +49,4 @@ else
    echo -e '\n'
    upload $APK
 fi
-
-
-
 

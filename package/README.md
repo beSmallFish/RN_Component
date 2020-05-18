@@ -1,5 +1,7 @@
 # RN 自动打包
 
+##目录介绍
+
 入口 				./package.sh      
 
 android打包 			./android.sh  
@@ -11,7 +13,7 @@ App接口环境,被其他文件引用		Env.js
 蒲公英上传				pgy_upload.sh
 
 
-参数 
+##参数 
 
 echo -e " -b ===>> 选择构建版本 ===>> release/debug/both"
 
@@ -23,7 +25,7 @@ echo -e " -u ===>> 上传到 ===>> pgy/appstore/"
 
 echo -e " -h ===>> 帮助 ===>> 查看已有参数"
 
-eg:
+##示例:
 ios打Release包 ./ios.sh or ./package.sh -s ios
 
 ios android同时打包 ./package.sh -s both
@@ -39,9 +41,7 @@ ios android同时打Release和Debug包，且指定dev环境 上传蒲公英 ./pa
 ----- appId相同 release会覆盖debug包, 且debug包不应该为外部使用.只上传Release包 -----------
 
 
-
-
-最终输出
+##最终输出
 
 ios目录：ios/ipa/
 
