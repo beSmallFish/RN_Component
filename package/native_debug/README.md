@@ -1,4 +1,4 @@
-# 调试Native时，只编译Native代码
+# 调试Native时，只编译Native代码, 不编译JS
 
 ###遇到的问题？
     

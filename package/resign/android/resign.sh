@@ -6,12 +6,14 @@ cur_path=`pwd`
 
 app_name=$1
 input_file="$cur_path/$2"
-keystore_path="$cur_path/$3"
+#keystore_path="$cur_path/$3"
+keystore_path=$3
 keystore_password=$4
 key_password=$5
 
 timestamp=`date '+%Y%m%d%H%M%S'`
-output_file="$cur_path/${app_name}_${timestamp}_signed.apk"
+output_file="$cur_path/${input_file%.*}_${timestamp}_signed.apk"
+#output_file="$cur_path/${app_name}_${timestamp}_signed.apk"
 sdk_path=~/Library/Android/sdk/build-tools/28.0.3/lib/
 
 
@@ -70,7 +72,7 @@ java -jar apksigner.jar sign \
 #rm -rf tmp/META-INF/CERT.*ss
 #rm -rf tmp/META-INF/MANIFEST.MF
 
-java -jar apksigner.jar verify -v --print-certs $output_file  
+#java -jar apksigner.jar verify -v --print-certs $output_file
 
 
 
